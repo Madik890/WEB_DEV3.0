@@ -1,0 +1,12 @@
+<h1>{{ title }}</h1>
+<p>{{ description }}</p>
+
+<p>Clicks: {{ count }}</p>
+<button (click)="increase()">Click me</button>
+<hr />
+<button (click)="increase()">Toggle List</button>
+<ul *ngf="showList">
+  <li *ngFor="let item of items">
+    {{ item }}
+  </li>
+</ul>
