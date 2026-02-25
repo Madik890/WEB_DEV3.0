@@ -1,0 +1,30 @@
+<section class="page">
+  <h1>Albums</h1>
+
+  @if (loading) {
+    <p class="info">Loading albums...</p>
+  } @else if (error) {
+    <p class="error">{{ error }}</p>
+    <button class="btn" (click)="loadAlbums()">Retry</button>
+  } @else if (albums.length === 0) {
+    <p class="info">No albums available.</p>
+  } @else {
+    <div class="list">
+      @for (album of albums; track trackByAlbumId($index, album)) {
+        <div class="album-item" (click)="openAlbum(album.id)">
+          <div class="album-text">
+            <div class="album-id">#{{ album.id }}</div>
+            <div class="album-title">{{ album.title }}</div>
+          </div>
+
+          <button
+            class="delete-btn"
+            (click)="deleteAlbum(album.id, $event)"
+            [disabled]="deletingIds.has(album.id)">
+            {{ deletingIds.has(album.id) ? 'Deleting...' : 'Delete' }}
+          </button>
+        </div>
+      }
+    </div>
+  }
+</section>
